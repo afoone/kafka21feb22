@@ -1,0 +1,5 @@
+{
+    "topics":  [{"topic": "test"},
+                {"topic": "test2"}],
+    "version":1
+}
