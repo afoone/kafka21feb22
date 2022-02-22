@@ -9,9 +9,8 @@ import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 
 
-public class HelloWorldProducer {
-    public static void main(String[] args) throws ExecutionException, InterruptedException {
-        System.out.println("hola kafka");
+public class AsyncProducer {
+    public static void main(String[] args) throws InterruptedException {
 
         // Configurar una seire de propiedades
         Properties properties = new Properties();
@@ -25,16 +24,16 @@ public class HelloWorldProducer {
 
 
         // Crearemos un mensaje
-        ProducerRecord<String, String> record = new ProducerRecord<String, String>("test", "hola mundo 2");
+        ProducerRecord<String, String> record = new ProducerRecord<String, String>("test_SDFFDASF",
+                "felicitacion", "hola mundo 2");
 
         // Enviarlo
-        // Envio síncrono
-        RecordMetadata respuesta = producer.send(record).get();
+        // Envio asíncrono
+        producer.send(record, new ProducerCallback());
+
+        Thread.sleep(3000L);
 
 
-        System.out.println(
-                "offset " + respuesta.offset() + " partition " + respuesta.partition() + "" + respuesta.topic()
-        );
 
 
     }

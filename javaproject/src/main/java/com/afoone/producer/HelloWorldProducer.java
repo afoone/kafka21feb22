@@ -1,11 +1,13 @@
 package com.afoone.producer;
 import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
 import org.apache.kafka.common.serialization.StringSerializer;
 
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 
 public class HelloWorldProducer {
@@ -15,9 +17,9 @@ public class HelloWorldProducer {
         // Configurar una seire de propiedades
         Properties properties = new Properties();
         // oblligatorias: el sitio donde nos conectamos y los dos serializer, en esta caso, vamos a usar dos strings
-        properties.put("bootstrap.servers", "localhost:9092");
-        properties.put("key.serializer", StringSerializer.class.getName());
-        properties.put("value.serializer", StringSerializer.class.getName());
+        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 
         // Generar el Productor
         KafkaProducer<String , String> producer = new KafkaProducer<String, String>(properties);
@@ -28,6 +30,8 @@ public class HelloWorldProducer {
 
         // Enviarlo
         // Envio síncrono
+        // Future<RecordMetadata> future = producer.send(record);
+
         RecordMetadata respuesta = producer.send(record).get();
 
 
