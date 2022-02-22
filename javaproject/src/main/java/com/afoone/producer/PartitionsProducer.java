@@ -18,6 +18,23 @@ public class PartitionsProducer {
         properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         properties.put(ProducerConfig.BATCH_SIZE_CONFIG, "3000");
         properties.put(ProducerConfig.LINGER_MS_CONFIG, "1000");
+        properties.put(ProducerConfig.ACKS_CONFIG, "all");
+
+        // compresión ->
+        properties.put(ProducerConfig.COMPRESSION_TYPE_CONFIG, "snappy");
+
+        // numero de reintentos
+        properties.put(ProducerConfig.RETRIES_CONFIG, "100");
+        // tiempo entre reintentos
+        properties.put(ProducerConfig.RETRY_BACKOFF_MS_CONFIG, "100");
+
+        properties.put(ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION, "5");
+
+
+
+        // Si tenemos muchos inflight request - para evitar que un batch que se ha producido antes llegue despues
+        // que otro que se ha producido despues
+        properties.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, true);
 
         // Generar el Productor
         KafkaProducer<String , String> producer = new KafkaProducer<String, String>(properties);
