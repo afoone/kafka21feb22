@@ -2,4 +2,8 @@ kafka_2.13-3.1.0/libs
 kafka_2.13-3.1.0/licenses
 kafka_2.13-3.1.0/logs
 kafka_2.13-3.1.0/site-docs
+kafka_2.13-2.8.0/libs
+kafka_2.13-2.8.0/licenses
+kafka_2.13-2.8.0/logs
+kafka_2.13-2.8.0/site-docs
 .DS_Store
